@@ -1,3 +1,5 @@
+package TP;
+
 import fr.uga.pddl4j.heuristics.state.StateHeuristic;
 import fr.uga.pddl4j.parser.DefaultParsedProblem;
 import fr.uga.pddl4j.parser.RequireKey;

@@ -85,9 +85,7 @@
                 <id>default-cli</id>
             <configuration>
               <mainClass>sokoban.SokobanMain</mainClass>
-              <mainClass>JsonDecoder</mainClass>
-              <mainClass>SimplePlanner</mainClass>
-            </configuration>
+      	    </configuration>
             </execution>
           </executions>
           </plugin>
