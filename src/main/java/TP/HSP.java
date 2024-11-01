@@ -31,7 +31,7 @@ import picocli.CommandLine;
     parameterListHeading = "%nParameters:%n",
     optionListHeading = "%nOptions:%n")
 
-public class SimplePlanner extends AbstractPlanner {
+public class HSP extends AbstractPlanner {
     
     
     private double heuristicWeight ;
@@ -39,7 +39,7 @@ public class SimplePlanner extends AbstractPlanner {
     /**
      * The class logger.
      */
-    private static final Logger LOGGER = LogManager.getLogger(SimplePlanner.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(HSP.class.getName());
 
     /**
      * Instantiates the planning problem from a parsed problem.
@@ -67,12 +67,16 @@ public class SimplePlanner extends AbstractPlanner {
                 this.getHeuristic(), this.getHeuristicWeight(), this.getTimeout());
         LOGGER.info("* Starting A* search \n");
         // Search a solution
+        search.setTimeOut(this.getTimeout());
         Plan plan = search.searchPlan(problem);
         // If a plan is found update the statistics of the planner and log search information
         if (plan != null) {
             LOGGER.info("* A* search succeeded\n");
             this.getStatistics().setTimeToSearch(search.getSearchingTime());
             this.getStatistics().setMemoryUsedToSearch(search.getMemoryUsed());
+            long total = this.getStatistics().getTimeToParse() + this.getStatistics().getTimeToSearch() + this.getStatistics().getTimeToEncode();
+            System.out.print("|" + total + "|");
+            System.out.println(plan.actions().size() + "|");
         } else {
             LOGGER.info("* A* search failed\n");
         }
@@ -111,7 +115,7 @@ public class SimplePlanner extends AbstractPlanner {
      */
     public static void main(String[] args) {
         try {
-            final SimplePlanner planner = new SimplePlanner();
+            final HSP planner = new HSP();
             CommandLine cmd = new CommandLine(planner);
             cmd.execute(args);
         } catch (IllegalArgumentException e) {
