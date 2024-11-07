@@ -30,17 +30,17 @@ for file in "$directory"/*; do
 		echo "Let's go for a run"
 		
 		# Run the planners in parallel
-		# The output of the HSP is stored in a .result.txt file
-		$(java -cp "$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q):target/classes/" "TP.${HSP##*/}" "$directory/domain.pddl" "$file" | grep -oE "\|[0-9]+\|[0-9]+\|" > .result.txt)&
+		# The last output of the HSP is stored in a .result file
+		$(java -cp "$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q):target/classes/" "TP.${HSP##*/}" "$directory/domain.pddl" "$file" | grep -oE "\|[0-9]+\|[0-9]+\|" > .result)&
 		pid1=$! # Store the PID of the first process
 
-		# The output of the MTC is stored in a .result2.txt file
-		$(java -cp "$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q):target/classes/" "TP2.${MTC##*/}" "$directory/domain.pddl" "$file" | grep -oE "\|[0-9]+\|[0-9]+\|" > .result2.txt) &
+		# The last output of the MTC is stored in a .result2 file
+		$(java -cp "$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q):target/classes/" "TP2.${MTC##*/}" "$directory/domain.pddl" "$file" | grep -oE "\|[0-9]+\|[0-9]+\|" > .result2) &
  		pid2=$! # Store the PID of the second process
-
+		
 		wait $pid1
 		# Get the results of HSP
-		result=$(cat .result.txt)
+		result=$(cat .result)
 
 		# If HSP didn't find a plan, we skip the MCT and inform the user
 		if [ -z "$result" ]; then
@@ -54,7 +54,7 @@ for file in "$directory"/*; do
 		
 		wait $pid2
 		# Get the results of MCT
-		result2=$(cat .result2.txt)
+		result2=$(cat .result2)
 
 		# we cut the results to get the time and the length of the plan
 		HSP_Time=$(echo "$result" | cut -d '|' -f 2)
@@ -85,6 +85,11 @@ for file in "$directory"/*; do
 				HSP_Length="**$HSP_Length**"
 				MCT_Length="**$MCT_Length**"
 			fi
+			# If the time of the HSP is greater than 10 minutes, we consider it as a timeout
+			if [ $MCT_Time -gt "600000" ]; then 
+				MCT_Time="Timeout"
+				MCT_Length="Timeout"
+			fi
 			echo "|${file##*/}|$HSP_Time|$HSP_Length|$MCT_Time|$MCT_Length|$TimeDifference|$LengthDifference|" >> tableau.md
 			continue
 		fi	
@@ -93,7 +98,7 @@ for file in "$directory"/*; do
 	# If the target is a directory, we start a new table in the tableau.md file
 	if [ -d "$file" ]; then
 		echo " " >> tableau.md	
-		echo "## Benchmark: $directory" >> tableau.md
+		echo "## Benchmark: $file" >> tableau.md
 		echo " " >> tableau.md
 		echo "|Problemes|HSP (ms total)|HSP (longueur)|MTC (ms total)|MTC (longueur)|Time Difference (HSP-MCT)|Length Difference (HSP-MCT)|" >> tableau.md
 		echo "|:-------:|:------------:|:------------:|:------------:|:------------:|:-----------------------:|:-------------------------:|" >> tableau.md

@@ -68,11 +68,13 @@ public class HSP extends AbstractPlanner {
         LOGGER.info("* Starting A* search \n");
         // Search a solution
         search.setTimeOut(this.getTimeout());
+	final long startTime = System.currentTimeMillis();
         Plan plan = search.searchPlan(problem);
+	final long endTime = System.currentTimeMillis();
         // If a plan is found update the statistics of the planner and log search information
         if (plan != null) {
             LOGGER.info("* A* search succeeded\n");
-            this.getStatistics().setTimeToSearch(search.getSearchingTime());
+            this.getStatistics().setTimeToSearch(endTime - startTime); //Modifier pour avoir un temps comparable à MCT
             this.getStatistics().setMemoryUsedToSearch(search.getMemoryUsed());
             long total = this.getStatistics().getTimeToParse() + this.getStatistics().getTimeToSearch() + this.getStatistics().getTimeToEncode();
             System.out.print("|" + total + "|");
