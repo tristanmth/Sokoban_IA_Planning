@@ -342,8 +342,6 @@ public class MTC extends AbstractPlanner {
     int NUM_WALK = 2000;
     int LENGTH_WALK = 10;
     int MAX_STEPS = 7;
-    double APn = 1;
-    double alpha = 0.9;
     
     public Plan MonteCarlo(Problem problem) {
         StateHeuristic heuristic = StateHeuristic.getInstance(this.getHeuristic(), problem);

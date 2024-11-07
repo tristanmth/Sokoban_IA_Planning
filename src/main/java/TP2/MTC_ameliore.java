@@ -34,7 +34,7 @@ import java.util.*;
     parameterListHeading = "%nParameters:%n",
     optionListHeading = "%nOptions:%n")
 
-public class MTC extends AbstractPlanner {
+public class MTC_ameliore extends AbstractPlanner {
 
 
     /**
@@ -243,7 +243,7 @@ public class MTC extends AbstractPlanner {
     /**
      * Creates a new A* search planner with the default configuration.
      */
-    public MTC() {
+    public MTC_ameliore() {
         this(Planner.getDefaultConfiguration());
     }
 
@@ -252,7 +252,7 @@ public class MTC extends AbstractPlanner {
      *
      * @param configuration the configuration of the planner.
      */
-    public MTC(final PlannerConfiguration configuration) {
+    public MTC_ameliore(final PlannerConfiguration configuration) {
         super();
         this.setConfiguration(configuration);
     }
@@ -344,8 +344,10 @@ public class MTC extends AbstractPlanner {
     int MAX_STEPS = 7;
     double APn = 1;
     double alpha = 0.9;
+    double extending_rate = 1.5;
+    int extending_period = 300;
     double tau = 0.5; // Température pour Gibbs Sampling
-
+    double Pn = 0;
     // Méthode principale de planification
     public Plan MonteCarlo(Problem problem) {
         StateHeuristic heuristic = StateHeuristic.getInstance(this.getHeuristic(), problem);
@@ -388,9 +390,12 @@ public class MTC extends AbstractPlanner {
     private Node MonteCarloRandomWalks(Problem problem, Node s, Condition goal, StateHeuristic heuristic, Map<Action, Double> actionValues) {
         double hmin = Double.POSITIVE_INFINITY;
         Node smin = null;
-        
+        LENGTH_WALK = 10;
         for (int i = 0; i < NUM_WALK; i++) {
             Node sPrime = new Node(s, s.getParent(), s.getAction(), s.getCost(), s.getHeuristic());
+            if (i%extending_period == 0 && i> 0) {
+                LENGTH_WALK = (int) (LENGTH_WALK * extending_rate);
+            }
             for (int j = 0; j < LENGTH_WALK; j++) {
                 List<Action> A = getApplicableActions(sPrime, problem);
                 if (A.isEmpty()) break;
@@ -406,9 +411,13 @@ public class MTC extends AbstractPlanner {
             }
             
             double hs = heuristic.estimate(sPrime, goal);
+            APn = (1-alpha)*APn + alpha*Pn;
             if (hs < hmin) {
+                Pn = Math.max(0,hmin-hs);
+                if(Pn>=APn)return sPrime;
                 smin = sPrime;
                 hmin = hs;
+                LENGTH_WALK = 10;
             }
         }
         return (smin == null) ? s : smin;
