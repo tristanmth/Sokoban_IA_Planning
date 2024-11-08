@@ -71,7 +71,8 @@
 |p16.pddl|**8875**|**30**|9355|64|-480|-34|
 |p17.pddl|435841|**45**|**21992**|103|413849|-58|
 |p18.pddl|459971|**42**|**18469**|79|441502|-37|
- 
+
+## Benchmark: /home/vassili/IdeaProjects/pddl4j/src/test/resources/benchmarks/pddl/ipc2000/logistics/strips-untyped
 |Problemes|HSP (ms total)|HSP (longueur)|MTC (ms total)|MTC (longueur)|Time Difference (HSP-MTC)|Length Difference (HSP-MTC)|
 |:-------:|:------------:|:------------:|:------------:|:------------:|:-----------------------:|:-------------------------:| 
 |p01.pddl|**2452**|**19**|3469|50|-1017|-31|
@@ -99,7 +100,7 @@
 | p06.pddl  |     351918     |     **41**     |    **5309**    |       59       |          346609           |             -18             |
 | p07.pddl  |    timeout     |    timeout     |    timeout     |    timeout     |          timeout          |           timeout           |
 
-## Benchmark: /home/vassili/IdeaProjects/pddl4j/src/test/resources/benchmarks/pddl/ipc1998/gripper//strips
+## Benchmark: /home/vassili/IdeaProjects/pddl4j/src/test/resources/benchmarks/pddl/ipc1998/gripper/strips
  
 |Problemes|HSP (ms total)|HSP (longueur)|MTC (ms total)|MTC (longueur)|Time Difference (HSP-MTC)|Length Difference (HSP-MTC)|
 |:-------:|:------------:|:------------:|:------------:|:------------:|:-----------------------:|:-------------------------:|
