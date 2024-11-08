@@ -89,3 +89,21 @@ java --add-opens java.base/java.lang=ALL-UNNAMED -server -Xms2048m -Xmx2048m -cp
 ```
 
 Voir les solutions de planification à http://localhost:8888/test.html
+
+Pour lancer le script : 
+
+sur Windows
+```
+bash script.sh
+~/IdeaProjects/pddl4j/src/test/resources/benchmarks/pddl/ipc2000/logistics 
+~/IdeaProjects/Sokoban_IA_Planning/target/classes/TP/HSP 
+~/IdeaProjects/sokoban/target/classes/TP2/MTC
+```
+
+sur LINUX/MacOS
+```
+./ script.sh 
+~/IdeaProjects/pddl4j/src/test/resources/benchmarks/pddl/ipc2000/logistics 
+~/IdeaProjects/Sokoban_IA_Planning/target/classes/TP/HSP 
+~/IdeaProjects/sokoban/target/classes/TP2/MTC
+```
