@@ -85,7 +85,7 @@ for file in "$directory"/*; do
 				HSP_Length="**$HSP_Length**"
 				MCT_Length="**$MCT_Length**"
 			fi
-			# If the time of the HSP is greater than 10 minutes, we consider it as a timeout
+			# If the time of the MCT is greater than 10 minutes, we consider it as a timeout
 			if [ $MCT_Time -gt "600000" ]; then 
 				MCT_Time="Timeout"
 				MCT_Length="Timeout"
@@ -97,10 +97,12 @@ for file in "$directory"/*; do
 
 	# If the target is a directory, we start a new table in the tableau.md file
 	if [ -d "$file" ]; then
+		MTC_short=$(echo "${MTC##*/}")
+		HSP_short=$(echo "${HSP##*/}")
 		echo " " >> tableau.md	
 		echo "## Benchmark: $file" >> tableau.md
 		echo " " >> tableau.md
-		echo "|Problemes|HSP (ms total)|HSP (longueur)|MTC (ms total)|MTC (longueur)|Time Difference (HSP-MCT)|Length Difference (HSP-MCT)|" >> tableau.md
+		echo "|Problemes|${HSP_short} (ms total)|${HSP_short} (longueur)|${MTC_short} (ms total)|${MTC_short} (longueur)|Time Difference (${HSP_short}-${MTC_short})|Length Difference (${HSP_short}-${MTC_short})|" >> tableau.md
 		echo "|:-------:|:------------:|:------------:|:------------:|:------------:|:-----------------------:|:-------------------------:|" >> tableau.md
 		
 		./script.sh "$file" "$HSP" "$MTC"
