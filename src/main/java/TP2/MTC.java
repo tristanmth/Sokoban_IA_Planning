@@ -343,6 +343,7 @@ public class MTC extends AbstractPlanner {
     int LENGTH_WALK = 10;
     int MAX_STEPS = 7;
     
+    // Méthode principale de planification
     public Plan MonteCarlo(Problem problem) {
         StateHeuristic heuristic = StateHeuristic.getInstance(this.getHeuristic(), problem);
         Condition  goal = problem.getGoal();
@@ -352,6 +353,7 @@ public class MTC extends AbstractPlanner {
         int counter = 0;
         final int timeout = this.getTimeout() * 1000;
         long time = System.currentTimeMillis();
+
         while (!s.satisfy(goal) && (System.currentTimeMillis()-time< timeout)) {
             if (counter > MAX_STEPS || DeadEnd(s,problem)) {
                 s = new Node(s0, null, -1, 0, heuristic.estimate(s0, goal));
@@ -375,7 +377,7 @@ public class MTC extends AbstractPlanner {
         return getApplicableActions(sprime,problem).isEmpty();
     }
 
-
+    // Monte Carlo 
     private Node MonteCarloRandomWalks(Problem problem,Node s, Condition goal, StateHeuristic heuristic) {
         double hmin = Double.POSITIVE_INFINITY;
         Node smin = null;
@@ -406,8 +408,9 @@ public class MTC extends AbstractPlanner {
         return (smin == null)? s:smin;
     }
 
+    // Applique l'effet d'une action et met à jour l'état
     private Node appliquer(Node sPrime,  Action a, Problem problem, int indexAction, StateHeuristic heuristic) {
-        // We apply the effect of the action
+        // Application de l'effet de l'action
         Node next = new Node(sPrime);
         List<ConditionalEffect> effects = a.getConditionalEffects();
         for (ConditionalEffect ce : effects) {
@@ -415,7 +418,7 @@ public class MTC extends AbstractPlanner {
                 next.apply(ce.getEffect());
             }
         }
-        //We set the new child node information
+        // Mise à jour des informations du nœud suivant
         double g = sPrime.getCost() + 1;
         next.setCost(g);
         next.setParent(sPrime);
@@ -428,6 +431,7 @@ public class MTC extends AbstractPlanner {
         return A.get((int) (Math.random() * A.size()));
     }
 
+    // Sélection des actions applicables dans un état donné
     private List<Action> getApplicableActions(State s, Problem problem) {
         List<Action> actions = new ArrayList<>();
         for (int i = 0; i < problem.getActions().size(); i++) {
@@ -447,6 +451,8 @@ public class MTC extends AbstractPlanner {
      * @param problem the problem.
      * @return the search extracted from the specified node.
      */
+
+    // Extraire le plan final
     private Plan extractPlan(final Node node, final Problem problem) {
         Node n = node;
         final Plan plan = new SequentialPlan();
