@@ -116,23 +116,4 @@
 |p03.pddl|**6966**|**29**|27948|62|-20982|-33|
 |p04.pddl|**21431**|**30**|56163|67|-34732|-37|
 |p05.pddl|**350181**|**44**|Timeout|Timeout|-253634|-26|
- 
-## Benchmark: /home/vassili/IdeaProjects/pddl4j/src/test/resources/benchmarks/pddl/ipc2002/depots//strips-automatic
- 
-|Problemes|HSP (ms total)|HSP (longueur)|MTC (ms total)|MTC (longueur)|Time Difference (HSP-MTC)|Length Difference (HSP-MTC)|
-|:-------:|:------------:|:------------:|:------------:|:------------:|:-----------------------:|:-------------------------:|
- 
-## Benchmark: /home/vassili/IdeaProjects/pddl4j/src/test/resources/benchmarks/pddl/ipc2002/depots//strips-hand-coded
- 
-|Problemes|HSP (ms total)|HSP (longueur)|MTC (ms total)|MTC (longueur)|Time Difference (HSP-MTC)|Length Difference (HSP-MTC)|
-|:-------:|:------------:|:------------:|:------------:|:------------:|:-----------------------:|:-------------------------:|
- 
-## Benchmark: /home/vassili/IdeaProjects/pddl4j/src/test/resources/benchmarks/pddl/ipc2002/depots//time-automatic
- 
-|Problemes|HSP (ms total)|HSP (longueur)|MTC (ms total)|MTC (longueur)|Time Difference (HSP-MTC)|Length Difference (HSP-MTC)|
-|:-------:|:------------:|:------------:|:------------:|:------------:|:-----------------------:|:-------------------------:|
- 
-## Benchmark: /home/vassili/IdeaProjects/pddl4j/src/test/resources/benchmarks/pddl/ipc2002/depots//time-hand-coded
- 
-|Problemes|HSP (ms total)|HSP (longueur)|MTC (ms total)|MTC (longueur)|Time Difference (HSP-MTC)|Length Difference (HSP-MTC)|
-|:-------:|:------------:|:------------:|:------------:|:------------:|:-----------------------:|:-------------------------:|
+
