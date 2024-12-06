@@ -152,5 +152,5 @@ python SatResultsScript.py
 ### Exercice 2
 
 L’encodage n’a généralement pas d’impact significatif sur la difficulté de résolution, sauf en cas d’encodage inefficace
-ou de structures spécifiques qui pourraient influencer les performances de certains solveurs.
+ou de structures spécifiques qui pourraient influencer les performances de certains solveurs. Toutefois, un encodage structuré et bien conçu peut parfois simplifier la résolution en facilitant l’exploitation des contraintes du problème. La difficulté dépend donc principalement de la qualité de l’encodage et des caractéristiques du problème, plutôt que de l’encodage en lui-même.
 
