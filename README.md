@@ -133,7 +133,9 @@ Vous pouvez lancer pour avoir de l'aide :
 ./script.sh -h
 ```
 
-Les résultats sont affichés dans le fichier [tableauSAT.md](tableauSAT.md)
+Les résultats sont affichés dans le fichier [tableauSAT.md](tableauSAT.md) 
+
+Les Differences Score et Time sont cumulées sur tout le domaine.
 
 ```
 ./script.sh  <chemin_vers_un_benchmark> target/classes/TP/HSP target/classes/TP3/SAT
