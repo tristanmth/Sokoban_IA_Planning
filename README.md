@@ -154,3 +154,4 @@ python SatResultsScript.py
 L’encodage n’a généralement pas d’impact significatif sur la difficulté de résolution, sauf en cas d’encodage inefficace
 ou de structures spécifiques qui pourraient influencer les performances de certains solveurs. Toutefois, un encodage structuré et bien conçu peut parfois simplifier la résolution en facilitant l’exploitation des contraintes du problème. La difficulté dépend donc principalement de la qualité de l’encodage et des caractéristiques du problème, plutôt que de l’encodage en lui-même.
 
+(source utilisée : [On the Empirical Time Complexity of Scale-Free 3-SAT at the Phase Transition](https://link.springer.com/chapter/10.1007/978-3-030-17462-0_7) )
