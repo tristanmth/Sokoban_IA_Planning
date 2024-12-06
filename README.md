@@ -139,7 +139,8 @@ Les résultats sont affichés dans le fichier [tableauSAT.md](tableauSAT.md)
 ./script.sh  <chemin_vers_un_benchmark> target/classes/TP/HSP target/classes/TP3/SAT
 ```
 
-Pour lancer avec un timeout fixe de 30s mais avec un validateur de plan
+Pour lancer avec un timeout fixe de 30s mais avec un validateur de plan.
+
 Les résultats sont affichés dans le fichier [SATResults10Problems.md](SATResults10Problems.md)
 
 ```
